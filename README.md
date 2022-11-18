@@ -4,9 +4,8 @@
 
 1. [Requirements](#requirements)
 2. [Setup](#setup)
-3. [Documentation](#documentation)
-4. [Usage](#usage)
-5. [Development](#development)
+3. [Usage](#usage)
+4. [Development](#development)
 
 ## Requirements
 
@@ -25,33 +24,27 @@ you can find generate the key from [here](https://djecrety.ir/)
 more information on how to set up a virtual environment, check the instructions on [this link](https://tutorial.djangogirls.org/en/django_installation/). Install the required libraries by running the commands below, by changing to
 the project directory.
 
-        poetry install
+        make deps
 
 6. After installation, run the following command:
 
-       poetry run python manage.py migrate
+       make migrate
 
 7. A local ```dbsqlite``` file will be generate at the root of the project.
-8. Create a superuser by running the ``python manage.py createsuperuser`` and fill in the details.
-9. After creating superuser run ``python manage.py runserver`` open the browser and run  ``127.0.0.1:8000/admin`` , login with the credentials created.
+8. Create a superuser by running the ``make esuperuser`` and fill in the details.
+9. After creating superuser run ``make runserver`` open the browser and run  ``127.0.0.1:8000/admin`` , login with the credentials created.
 10. For details of how to get started with django, check out [this link](https://www.djangoproject.com/start/)
 11. In order to work with a virtual environment, check out [this link](https://tutorial.djangogirls.org/en/installation/#pythonanywhere)
-
-## Documentation
-
-Visit the base url and go to the docs url
-
-    <domain>/docs/
-
-For more detailed documentation, navigate to the `core/apiv1/README.md` file.
 
 ## Usage
 
 To run locally:
 
-    python manage.py runserver
+    make runserver
 
 ## Development
+
+Ensure you have pre-commit installed globally by running `pre-commit install` for pre-commit hooks to run.
 
 Pull the latest main version:
 
