@@ -1,0 +1,15 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Log Out{% endblock %}
+
+{% block content %}
+    <h4 class="text-center">Log Out</h4>
+    <form method="post">
+        {% csrf_token %}
+        {% include 'partials/form.html' %}
+        <div class="clearfix py-3 text-center">
+            <p class="text-muted">Are you sure you want to log out? </p>
+            <button class="btn btn-dark px-3" type="submit">Log Out</button>
+        </div>
+    </form>
+{% endblock %}

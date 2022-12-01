@@ -45,9 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # libraries
+    'allauth',
+    'allauth.account',
+    'widget_tweaks',
     # internal apps
-    "users",
     "core",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -125,6 +129,11 @@ PHONENUMBER_DB_FORMAT = env("PHONENUMBER_DB_FORMAT", default="KE")
 PHONENUMBER_DEFAULT_REGION = env(
     "PHONENUMBER_DEFAULT_REGION", default="INTERNATIONAL"
 )
+
+# allauth configs
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'login_redirect'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
