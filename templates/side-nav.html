@@ -1,0 +1,276 @@
+<div class="left-nav-wrap">
+  <div class="left-sidebar">
+    <nav class="sidebar-menu">
+      <ul id="nav-accordion">
+      {% if request.user.role == 'admin' or request.user.role == 'SMS APP staff' %}
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:dashboard_index:index' %}"
+            class="{% if request.path == '/' %}active{% endif %}"
+          >
+            <i class="ti-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:partners:partners_list' %}"
+            class="{% if '/partners' in request.path %}active{% endif %}"
+          >
+            <i class="ti-pencil"></i>
+            <span>Partners</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'customers/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-user"></i>
+            <span>Customers</span>
+          </a>
+          <ul class="sub">
+            <li
+              class="{% if 'customers/all' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'core:customers:customers_list' %}"
+                >All Customers</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'partners/branches/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-map-alt"></i>
+            <span>Locations</span>
+          </a>
+          <ul class="sub">
+            <li
+              class="{% if 'branches/all/' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'core:partners:branches_list' %}"
+                >All Locations
+              </a>
+            </li>
+            <li
+              class="{% if 'branches/all/' in request.path %}active{% endif %}"
+            >
+              <a href="">Location Cluster </a>
+            </li>
+          </ul>
+        </li>
+         <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'users/' or 'dukas/owners' in request.path %}active{% endif %}"
+          >
+            <i class="fa fa-group"></i>
+            <span>Clerk Platforms</span>
+          </a>
+          <ul class="sub">
+            <li
+              class="{% if 'users/clerks/' in request.path %}active{% endif %}">
+              <a href="{% url 'core:users:clerks_list' %}"
+              class="{% if '/users/clerks/' in request.path %}active{% endif %}"
+          >
+            <span>Clerk App</span>
+          </a>
+            </li>
+            <li
+              class="{% if 'users/tp-clerks/' in request.path %}active{% endif %}">
+              <a href="{% url 'core:users:tp_clerks_list' %}"
+              class="{% if '/users/tp-clerks/' in request.path %}active{% endif %}"
+          >
+            <span>Trading Points</span>
+          </a>
+            </li>
+            <li
+              class="{% if 'users/duka-owners/' in request.path %}active{% endif %}">
+              <a href="{% url 'core:duka_owners:list' %}"
+              class="{% if '/users/duka-owners/' in request.path %}active{% endif %}"
+          >
+            <span>USSD</span>
+          </a>
+            </li>
+          </ul>
+        </li>
+        <li class="sub-menu">
+        <a
+            href="#"
+            class="{% if 'weight-deposits/' in request.path %}active{% endif %}"
+          >
+            <i class="vl_scale"></i>
+            <span>Plastic Deposits</span>
+
+          </a>
+          <ul class="sub">
+          <li>
+          <a
+            href="{% url 'core:deposits:deposits_list' %}"
+            class="{% if request.path == '/weight-deposits/all/' %}active{% endif %}"
+          >
+            <span>Locations Deposits</span>
+          </a>
+          <li>
+          <li>
+          <a
+            href="{% url 'core:deposits:trading_points_deposits_list' %}"
+            class="{% if request.path == '/weight-deposits/trading-points/' %}active{% endif %}"
+          >
+            <span>Trading Points Deposits</span>
+          </a>
+          <li>
+          </ul>
+        </li>
+
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:redemptions:redemptions_list' %}"
+            class="{% if request.path == '/partners/redemptions/' %}active{% endif %}"
+          >
+            <i class="vl_money-bag"></i>
+            <span>Points Redemptions</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:bonus_payouts:list' %}"
+            class="{% if request.path == '/payments/' %}active{% endif %}"
+          >
+            <i class="vl_money"></i>
+            <span>Duka Payments</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'reports/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-bar-chart"></i>
+            <span>Reports</span>
+          </a>
+          <ul class="sub">
+            <li class="{% if 'reports' in request.path %}active{% endif %}">
+              <a href="{% url 'core:reports:reports_list' %}"
+                >All</a
+              >
+            </li>
+          </ul>
+        </li>
+      {% endif %}
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if '/text-messages/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-comment-alt"></i>
+            <span>Sms</span>
+          </a>
+          <ul class="sub">
+            <li class="{% if 'text-messages' in request.path %}active{% endif %}">
+              <a href="{% url 'core:texts:text_list' %}"
+                >Logs</a
+              >
+            </li>
+          </ul>
+          <ul class="sub">
+            <li class="{% if 'text-messages' in request.path %}active{% endif %}">
+              <a href="{% url 'core:texts:text_add' %}"
+                >Send</a
+              >
+            </li>
+          </ul>
+          {% if request.user.role == 'admin' or request.user.role == 'SMS APP staff' %}
+          <ul class="sub">
+            <li class="{% if 'sms-admins' in request.path %}active{% endif %}">
+              <a href="{% url 'core:sms_admins:admins_list' %}"
+                >Admins</a
+              >
+            </li>
+          </ul>
+          {% endif %}
+        </li>
+        {% if request.user.role == 'admin' or request.user.role == 'SMS APP staff' %}
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:trading_points:list' %}"
+            class="{% if '/trading-points/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-location-arrow"></i>
+            <span>Trading Points</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a
+            href="{% url 'core:feedback:feedback_list' %}"
+            class="{% if '/feedback/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-comments"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'settings/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-settings"></i>
+            <span>System Admin</span>
+          </a>
+          <ul class="sub">
+            <li
+              class="{% if 'settings/point-settings' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'core:settings:points_value_list' %}"
+                >Point Conversion Settings</a
+              >
+            </li>
+            <li
+              class="{% if 'settings/duka-deposit-bonus' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'core:settings:duka_deposit_bonus_config_list' %}"
+                >Duka Deposit Bonus Settings</a
+              >
+            </li>
+            <li
+              class="{% if 'settings/duka-deposit-bonus' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'core:settings:duka_redemption_bonus_config_list' %}"
+                >Duka Redemption Bonus Settings</a
+              >
+            </li>
+            <li class="{% if 'admins' in request.path %}active{% endif %}">
+              <a href="{% url 'core:staff:staff_list' %}">Admin Users</a>
+            </li>
+            <li
+              class="{% if request.path == '/users/admins/add' %}active{% endif %}"
+            >
+              <a href="{% url 'core:staff:staff_add' %}">Add Admin User</a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        <li class="sub-menu">
+          <a
+            href="#"
+            class="{% if 'accounts/' in request.path %}active{% endif %}"
+          >
+            <i class="ti-info"></i>
+            <span>Account</span>
+          </a>
+          <ul class="sub">
+            <li
+              class="{% if 'accounts/password-change/' in request.path %}active{% endif %}"
+            >
+              <a href="{% url 'password_update' %}">Password Reset</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

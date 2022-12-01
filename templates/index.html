@@ -1,0 +1,198 @@
+{% extends 'dashboard/base.html' %} {% block content %}
+<div class="row">
+  <div class="col-xl-3 col-sm-6">
+    <div class="card mb-4 bg-purple">
+      <div class="card-body">
+        <div class="media d-flex align-items-center">
+          <div class="mr-4 rounded-circle bg-white sr-icon-box text-purple">
+            <i class="vl_fountain-pen"></i>
+          </div>
+          <div class="media-body text-light">
+            <h4 class="text-uppercase mb-0 weight500">{{ partners_count }}</h4>
+            <span>Partners</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <div class="card mb-4 bg-primary">
+      <div class="card-body">
+        <div class="media d-flex align-items-center">
+          <div class="mr-4 rounded-circle bg-white sr-icon-box text-primary">
+            <i class="vl_user-female"></i>
+          </div>
+          <div class="media-body text-white">
+            <h4 class="text-uppercase mb-0 weight500">{{ customers_count  }}</h4>
+            <span>Customers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <div class="card mb-4 bg-danger">
+      <div class="card-body">
+        <div class="media d-flex align-items-center">
+          <div class="mr-4 rounded-circle bg-white sr-icon-box text-danger">
+            <i class="vl_scale"></i>
+          </div>
+          <div class="media-body text-white">
+            <h4 class="text-uppercase mb-0 weight500">{{ total_weight_collected.weight__sum|floatformat:2 }} Kg</h4>
+            <span>Weight Collected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <div class="card mb-4 bg-success">
+      <div class="card-body">
+        <div class="media d-flex align-items-center">
+          <div class="mr-4 rounded-circle bg-white sr-icon-box text-success">
+            <i class="vl_user-male"></i>
+          </div>
+          <div class="media-body text-white">
+            <h4 class="text-uppercase mb-0 weight500">{{ clerks_count }}</h4>
+            <span>Clerks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="text-center py-3">Recently Registered Customers</h3>
+        <div class="table-responsive">
+          <table class="table table-striped">
+           <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone Number</th>
+                            <th>Joined</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in recent_customers %}
+                        <tr>
+                            <td>{{ customer.first_name }}</td>
+                            <td>
+                                {{  customer.last_name }}
+                            </td>
+                            <td>
+                                {{  customer.phone_number }}
+                            </td>
+                            <td>
+                                {{  customer.created_at }}
+                            </td>
+                            <td>
+                                <a href="{% url 'core:customers:customer_details' customer.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr class="text-center">
+                            <td colspan="5">No customer uploaded yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="text-center py-3">Recently Added Clerks</h3>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in recent_clerks %}
+              <tr>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.phone_number }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <a href="{% url 'core:users:clerk_details' user.pk %}">
+                    <button class="btn btn-primary btn-sm">View</button>
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr class="text-center">
+                <td colspan="5">No clerks added yet.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="text-center py-3">Recently Added Partners</h3>
+        <div class="table-responsive">
+          <table class="table table-striped">
+                                <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Branches</th>
+                            <th>Added</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for partner in recent_partners %}
+                        <tr>
+                            <td>{{ partner.name }}</td>
+                            <td>
+                                {{  partner.branches.count }}
+                            </td>
+                            <td>
+                                {{  partner.created_at }}
+                            </td>
+                            <td>
+                                <a href="{% url 'core:partners:partner_details' partner.pk %}">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr class="text-center">
+                            <td colspan="5">No partner uploaded yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

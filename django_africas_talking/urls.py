@@ -16,10 +16,26 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from users.views.auth_redirect import AuthRedirect, LoginUserView, PasswordUpdateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    # auth redirection
+    path('accounts/logout/', AuthRedirect.logout_user, name='logout'),
+    path('', LoginUserView.as_view(), name='login'),
+    path(
+        'accounts/login-redirect/',
+        AuthRedirect.login_redirect,
+        name='login_redirect',
+    ),
+    path(
+        'accounts/password-update/',
+        PasswordUpdateView.as_view(),
+        name='password_update',
+    ),
 ]
 
 urlpatterns += static(
